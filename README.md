@@ -12,5 +12,5 @@ Written in Python 2. Build with py2app, pyobjc.
 
 ###Credits
 https://github.com/magicmonkey/lifxjs  
-https://github.com/sharph/lifx-python
+https://github.com/sharph/lifx-python  
 https://github.com/GNious
