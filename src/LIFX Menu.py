@@ -18,7 +18,7 @@ class LifxMenu(NSObject):
 		self.status_item.setHighlightMode_(True)
 
 		menu = NSMenu.alloc().init()
-		self.toggle_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_('Toggle lights', 'toggle:', '')
+		self.toggle_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_('Toggle All Lights', 'toggle:', '')
 		menu.addItem_(self.toggle_item)
 		self.status_item.setMenu_(menu)
 
@@ -42,21 +42,23 @@ class LifxMenu(NSObject):
 		subitem.setRepresentedObject_( 'Blue' )
 		submenu.addItem_( subitem )
 
+		menu.addItem_(NSMenuItem.separatorItem())
 
 		for bulb in self.lights:
 			submenu =  NSMenu.alloc().init()
-			item =  NSMenuItem.alloc().initWithTitle_action_keyEquivalent_( bulb.get_addr(), '', '')
+			name = bulb.bulb_label or bulb.get_addr()
+			item =  NSMenuItem.alloc().initWithTitle_action_keyEquivalent_( name, '', '')
 			item.setSubmenu_( submenu )
 			menu.addItem_( item )
-			subitem =  NSMenuItem.alloc().initWithTitle_action_keyEquivalent_( 'Toggle light', 'toggleBulb:', '')
+			subitem =  NSMenuItem.alloc().initWithTitle_action_keyEquivalent_( 'Toggle Light', 'toggleBulb:', '')
 			subitem.setRepresentedObject_( bulb )
 			subitem.setState_(bulb.power)
 			submenu.addItem_( subitem )
 
+		menu.addItem_(NSMenuItem.separatorItem())
 			
 		quit_item = NSMenuItem.alloc().initWithTitle_action_keyEquivalent_('Quit', 'terminate:', '')
 		menu.addItem_(quit_item)
-
 
 
 	def toggle_(self, notification):
